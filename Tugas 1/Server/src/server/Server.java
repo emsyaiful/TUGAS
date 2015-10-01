@@ -24,18 +24,26 @@ public class Server {
      * @param args the command line arguments
      */
     
-      public static void readdir(String directoryName){
+      public static String readdir(String directoryName){
         File folder = new File(directoryName);
         File[] listOfFiles = folder.listFiles();
-        
-        for(int i= 0;i<listOfFiles.length;i++){
-            System.out.println(listOfFiles[i].getName());//belum diubah ke Output Stream
+        String wawa=null;
+        if(listOfFiles.length!=0){
+            wawa=listOfFiles[0].getName();
+        for(int i= 1;i<listOfFiles.length;i++){
+            wawa=wawa+"\n"+listOfFiles[i].getName();//belum diubah ke Output Stream
+        }
+        return wawa;
+        }
+        else{
+            return "None";
         }
     }
     
-    public static void makedir(String directoryName){
+    public static String makedir(String directoryName){
         File dir = new File(directoryName);
         dir.mkdir();
+        return "Directory has been built";
     }
     
     public static void main(String[] args) {
@@ -48,6 +56,7 @@ public class Server {
               OutputStream os=sock.getOutputStream();
               String dir = "C:/";
               byte[] buf=new byte[64];
+              String papa=null;
               
               
               
@@ -62,17 +71,25 @@ public class Server {
                   else{
                       dir=dir+kk;
                   }
+                  papa=dir;
               }
               else if("ls ".equals(kk.substring(0,3))){
-                  readdir(dir);
+                  papa=readdir(dir);
               }
               else if("mkdir ".equals(kk.substring(0,5))){
                   dir=dir+kk.substring(6);
-                  makedir(dir);
+                  papa=makedir(dir);
               }
               else if("exit".equals(kk.substring(0,3))){
+                  os.close();
+                  is.close();
+                  sock.close();
+                  ss.close();
                   break;
               }
+              
+              os.write(papa.getBytes());
+              os.flush();
   
               }
           } catch (IOException ex) {

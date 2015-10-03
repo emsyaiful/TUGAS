@@ -51,7 +51,7 @@ public class Client {
                 System.out.println(kak);
                 ostr.write(kak.getBytes());
                 ostr.flush();
-                if(kak=="exit"){
+                if("exit".equals(kak)){
                     ostr.close();
                     istr.close();
                     Listener.close();

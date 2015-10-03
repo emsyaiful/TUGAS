@@ -41,7 +41,7 @@ public class Client {
         
         InputStream istr=Listener.getInputStream();
         OutputStream ostr=Listener.getOutputStream();
-        String kak="";
+        String kak;
             istr.read(buf);
             System.out.println(new String(buf));
             
@@ -59,7 +59,7 @@ public class Client {
                 }
                  while(true){
                  buf = new byte[20];
-                 len= is.read(buf);
+                 len= istr.read(buf);
                  if(len==-1){
                     break;
                  }

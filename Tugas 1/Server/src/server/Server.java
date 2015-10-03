@@ -65,23 +65,28 @@ public class Server {
                   buf=new byte[64];
                   is.read(buf);
                  String kk= new String(buf);
-                  if("cd ".equals(kk.substring(0,3))){
-                        if(":/".equals(kk.substring(5,6))){
-                            dir=kk;
+                 System.out.print(kk);
+                  if("l".equals(kk.substring(0,1))){
+                  papa=readdir(dir);
+              }
+            else if("c".equals(kk.substring(0,1))){
+                        if(":".equals(kk.substring(4,5))){
+                            dir=kk.substring(3);
+                        }
+                        else if("..".equals(kk.substring(3,5))){
+                            int aaa=dir.lastIndexOf("/");
+                            dir=dir.substring(0,aaa);
                         }
                         else{
-                            dir=dir+kk;
+                            dir=dir+"/"+kk.substring(3);
                          }
                   papa=dir;
               }
-              else if("ls".equals(kk.substring(0,2))){
-                  papa=readdir(dir);
-              }
-              else if("mkdir ".equals(kk.substring(0,5))){
+              else if("m".equals(kk.substring(0,1))){
                   dir=dir+kk.substring(6);
                   papa=makedir(dir);
               }
-              else if("exit".equals(kk.substring(0,3))){
+              else if("e".equals(kk.substring(0,1))){
                   os.close();
                   is.close();
                   sock.close();
@@ -91,10 +96,10 @@ public class Server {
               else{
                   papa="Error::Command not found";
               }
-              
+              System.out.print(papa);
               os.write(papa.getBytes());
               os.flush();
-  
+        
               }
           } catch (IOException ex) {
               Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

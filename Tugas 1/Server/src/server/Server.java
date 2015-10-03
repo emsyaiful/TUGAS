@@ -57,23 +57,24 @@ public class Server {
               String dir = "C:/";
               byte[] buf=new byte[64];
               String papa=null;
-              
+              os.write("Program Started".getBytes());
+              os.flush();
               
               
               while(true){
                   buf=new byte[64];
                   is.read(buf);
                  String kk= new String(buf);
-              if("cd ".equals(kk.substring(0,3))){
-                  if(":/".equals(kk.substring(5,6))){
-                      dir=kk;
-                  }
-                  else{
-                      dir=dir+kk;
-                  }
+                  if("cd ".equals(kk.substring(0,3))){
+                        if(":/".equals(kk.substring(5,6))){
+                            dir=kk;
+                        }
+                        else{
+                            dir=dir+kk;
+                         }
                   papa=dir;
               }
-              else if("ls ".equals(kk.substring(0,3))){
+              else if("ls".equals(kk.substring(0,2))){
                   papa=readdir(dir);
               }
               else if("mkdir ".equals(kk.substring(0,5))){
@@ -86,6 +87,9 @@ public class Server {
                   sock.close();
                   ss.close();
                   break;
+              }
+              else{
+                  papa="Error::Command not found";
               }
               
               os.write(papa.getBytes());

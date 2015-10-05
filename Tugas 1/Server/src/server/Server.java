@@ -5,7 +5,10 @@
  */
 package server;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -23,6 +26,31 @@ public class Server {
     /**
      * @param args the command line arguments
      */
+    
+    public static String opef(String Filepath){
+        String kk="";
+        byte[] buffer = new byte[10];
+        BufferedInputStream bis;
+        try {
+            bis = new BufferedInputStream(new FileInputStream(Filepath));
+            while(true){
+                buffer=new byte[10];
+            int olol=bis.read(buffer);
+            kk=kk+new String(buffer);
+            if(olol==-1){
+                break;
+            }
+            }
+            bis.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return kk;
+    }
+    
+    
     
       public static String readdir(String directoryName){
         File folder = new File(directoryName);
@@ -85,6 +113,10 @@ public class Server {
               else if("m".equals(kk.substring(0,1))){
                   dir=dir+kk.substring(6);
                   papa=makedir(dir);
+              }
+              else if("o".equals(kk.substring(0,1))){
+                  String haha=dir+kk.substring(5);
+                  papa=opef(haha);
               }
               else if("e".equals(kk.substring(0,1))){
                   os.close();

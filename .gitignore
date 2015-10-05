@@ -10,3 +10,7 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/Tugas 1/Server/nbproject/private/
+/Tugas 1/Client/nbproject/private/
+/Tugas 1/Client/build/
+/Tugas 1/Client/dist/

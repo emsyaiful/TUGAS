@@ -1,2 +1,4 @@
-Buggy antara di InputStream Server atau OutputStream Client, karena ga bisa berhubungan antara server dan client pada looping ke-2
+ Buggy antara di InputStream Server atau OutputStream Client, karena ga bisa berhubungan antara server dan client pada looping ke-2
 mkdir masih kurang sempurna..
+Socket belum bersih, masih ada karakter sisa
+makefile belum bisa.

@@ -58,8 +58,8 @@ public class Server {
         File[] listOfFiles = folder.listFiles();
         String wawa=null;
         if(listOfFiles.length!=0){
-            wawa=listOfFiles[0].getName();
-        for(int i= 1;i<listOfFiles.length;i++){
+            wawa = listOfFiles[0].getName();
+        for(int i = 1;i<listOfFiles.length;i++){
             wawa=wawa+"\n"+listOfFiles[i].getName();//belum diubah ke Output Stream
         }
         return wawa;
@@ -113,7 +113,10 @@ public class Server {
                   papa=dir;
               }
               else if("m".equals(kk.substring(0,1))){
-                  dir=dir+kk.substring(6);
+                  String[] split = kk.split("\\s+");
+                  //split[1] = split[1].substring(0,split[1].length()-1);
+                  dir=dir+kk.substring(6,9);
+                  System.out.print(dir);
                   papa=makedir(dir);
               }
               else if("o".equals(kk.substring(0,1))){
@@ -133,7 +136,6 @@ public class Server {
               System.out.print(papa);
               os.write(papa.getBytes());
               os.flush();
-        
               }
           } catch (IOException ex) {
               Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

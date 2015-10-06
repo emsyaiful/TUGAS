@@ -57,16 +57,16 @@ public class Client {
                     ostr.close();
                     istr.close();
                     Listener.close();
+                            
                     break;
                 }
                 buf = new byte[200];
-                while ( (len = istr.read(buf)) > 0) {
+                while ((len = istr.read(buf)) > 0) {
                     System.out.println(len);
                     System.out.print(new String(buf));
                 }
-//                len = istr.read(buf);
-//                System.out.println(len);
-                System.out.println("exit loop read");
+                //System.out.println(len);
+                //System.out.println("exit loop read");
             }
         }
         catch(Exception e)

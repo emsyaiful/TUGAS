@@ -6,6 +6,7 @@
 package server;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -80,9 +81,9 @@ public class Server {
               
               ServerSocket ss= new ServerSocket(5000);
               Socket sock=ss.accept();
-              InputStream is=sock.getInputStream();
-              OutputStream os=sock.getOutputStream();
-              String dir = "C:/";
+              BufferedInputStream is = new BufferedInputStream(sock.getInputStream());
+              BufferedOutputStream os = new BufferedOutputStream(sock.getOutputStream());
+              String dir = "D:/UUL/";
               byte[] buf=new byte[64];
               String papa=null;
               os.write("Program Started".getBytes());
@@ -95,7 +96,8 @@ public class Server {
                  String kk= new String(buf);
                  System.out.print(kk);
                   if("l".equals(kk.substring(0,1))){
-                  papa=readdir(dir);
+                  papa=readdir(dir) + '\n';
+                  System.out.println(papa);
               }
             else if("c".equals(kk.substring(0,1))){
                         if(":".equals(kk.substring(4,5))){
@@ -106,7 +108,7 @@ public class Server {
                             dir=dir.substring(0,aaa);
                         }
                         else{
-                            dir=dir+"/"+kk.substring(3);
+                            dir=dir+"/"+kk.substring(3)+ '\n';
                          }
                   papa=dir;
               }
@@ -116,7 +118,7 @@ public class Server {
               }
               else if("o".equals(kk.substring(0,1))){
                   String haha=dir+kk.substring(5);
-                  papa=opef(haha);
+                  papa=opef(haha) + '\n';
               }
               else if("e".equals(kk.substring(0,1))){
                   os.close();
@@ -126,7 +128,7 @@ public class Server {
                   break;
               }
               else{
-                  papa="Error::Command not found";
+                  papa="Error::Command not found\n";
               }
               System.out.print(papa);
               os.write(papa.getBytes());

@@ -26,7 +26,7 @@ public class Server {
         try {
             // TODO code application logic here
 
-            ServerSocket ss = new ServerSocket(5001);
+            ServerSocket ss = new ServerSocket(80);
             
             while(true){
                 Socket so=ss.accept();

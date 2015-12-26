@@ -39,7 +39,7 @@ public class Player {
     
     public void move(int move)
     {
-        this.position= position + move;
+        this.position= (position + move)%40;
     }
     
     public int getCash()

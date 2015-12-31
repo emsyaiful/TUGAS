@@ -33,12 +33,16 @@ public class Player {
     }
     
     public void payCash(int pay)
-    {
+    {   
         this.cash = this.cash-pay;
     }
     
     public void move(int move)
     {
+        if(this.position + move >40)
+        {
+            this.addCash(500);
+        }
         this.position= (position + move)%40;
     }
     

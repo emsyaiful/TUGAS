@@ -5,6 +5,7 @@
  */
 package client;
 import java.util.Scanner;
+import java.util.ArrayList;
 /**
  *
  * @author asus
@@ -21,8 +22,9 @@ public class Client {
         Player player2= new Player("p2",500,0);
         Player player3= new Player("p3",500,0);
         Player player4= new Player("p4",500,0);
-        
+        Player other= new Player();
         GameControl GC = new GameControl();
+        ArrayList<Nation> Map = new ArrayList<>();
         GC.beginGame(player1, player2, player3, player4);
         
     }

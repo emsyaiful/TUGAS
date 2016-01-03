@@ -41,7 +41,7 @@ public class Player {
     {
         if(this.position + move >40)
         {
-            this.addCash(500);
+            this.addCash(200);
         }
         this.position= (position + move)%40;
     }

@@ -19,11 +19,11 @@ public class Nation {
         
     }
     
-    public Nation(int position,int price)
+    public Nation(int position,int price, Player owner)
     {
         this.position=position;
         this.price=price;
-        this.owner=null;
+        this.owner=owner;
     }
     
     public void buy(Player owner)

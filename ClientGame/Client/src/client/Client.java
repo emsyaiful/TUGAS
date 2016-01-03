@@ -25,6 +25,15 @@ public class Client {
         Player other= new Player();
         GameControl GC = new GameControl();
         ArrayList<Nation> Map = new ArrayList<>();
+        Nation Start = new Nation(0,0,other);
+        Nation Jakarta = new Nation(1,50,null);
+        Nation Bandung = new Nation(2,75,null);
+        Nation Banten = new Nation(3,100,null);
+        Nation Prison1 = new Nation(4,0,other);
+        Nation Semarang = new Nation(5,120,null);
+        Nation Solo = new Nation(6,140,null);
+        Nation Jogja = new Nation(7,160,null);
+        Nation FreeToGo = new Nation(8,0,other);
         GC.beginGame(player1, player2, player3, player4);
         
     }

@@ -24,6 +24,7 @@ public class Servergame {
 
     ArrayList<threaduser> threuser;
     ArrayList<room> roomava;
+    ArrayList<Integer> idroom;
     int roomid=0;
     int userid=0;
     
@@ -55,7 +56,19 @@ public class Servergame {
     public void makeroom(threaduser tu){
         room newroom=new room(tu,roomid);
         roomava.add(newroom);
+        idroom.add(roomid);
         roomid+=1;
+        
+    }
+    
+    public void deleteroom(int id){
+        for(room ro:roomava){
+            if(ro.getroomid()==id){
+             roomava.remove(ro);
+             idroom.remove(ro.getroomid());
+             break;
+            }
+        }
     }
     
     public void globalchat(Object o) throws IOException{

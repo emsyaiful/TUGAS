@@ -71,7 +71,7 @@ public class GameControl {
         }
     }
     
-    private void Auction()
+    private void Auction(Nation auctionNation)
     {
         
     }
@@ -210,6 +210,24 @@ public class GameControl {
         else if(command.equalsIgnoreCase("status"))
         {
             printStatus();
+        }
+        
+        else if (command.equalsIgnoreCase("sell"))
+        {
+            System.out.println("what player?");
+            commandReader = new Scanner(System.in);
+            int order = commandReader.nextInt();
+            Player currentPlayer= PlayerOrder.get(order-1);
+            System.out.println("where do you want to sell?");
+            commandReader = new Scanner(System.in);
+            int pos = commandReader.nextInt();
+            Nation currentPosition = Map.get(pos);
+            if(currentPosition.getOwner().equals(currentPlayer))
+            {
+                currentPosition.releaseOwner();
+                Auction(currentPosition);
+            }
+                
         }
         
         else if (command.equalsIgnoreCase("stop"))

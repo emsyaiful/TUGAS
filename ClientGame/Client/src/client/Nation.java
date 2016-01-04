@@ -46,6 +46,16 @@ public class Nation {
         return this.Name;
     }
     
+    public void releaseOwner()
+    {
+        this.owner = null;
+    }
+    
+    public void setOwner(Player owner)
+    {
+        this.owner = owner;
+    }
+    
     public Player getOwner()
     {
         return this.owner;

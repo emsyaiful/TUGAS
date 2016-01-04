@@ -85,11 +85,12 @@ public class GameControl {
         Scanner commandReader = new Scanner(System.in);
         command = commandReader.nextLine();
         if(command.equalsIgnoreCase("move"))
-        {
+            {
             System.out.println("choose which player to move");
             int order = commandReader.nextInt();
+            Player currentPlayer = PlayerOrder.get(order-1);
             rollDice(PlayerOrder.get(order-1));
-            Nation currentPosition = Map.get(PlayerOrder.get(order-1).getPosition());
+            Nation currentPosition = Map.get(currentPlayer.getPosition());
             System.out.println("You Arrived in "+currentPosition.getName());
             if(currentPosition.getOwner() !=other)
             {
@@ -99,16 +100,32 @@ public class GameControl {
             {
             System.out.println("None");
             System.out.println("Want to buy(y/n)?");
-            command = commandReader.nextLine();
-            if(command.equalsIgnoreCase("y"))
+               String decision= new String();
+               commandReader = new Scanner(System.in);
+               decision= commandReader.nextLine();
+               if(decision.equalsIgnoreCase("y"))
+               {
+               currentPosition.buy(currentPlayer);
+               System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+               }
+            }
+            else
             {
-               currentPosition.buy(PlayerOrder.get(order-1));
-               System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + PlayerOrder.get(order-1).getCash());
+                System.out.println(currentPosition.getOwner().getName());
+                if(currentPlayer != currentPosition.getOwner())
+                {
+                System.out.println("You pay to owner");
+                currentPosition.pay(currentPlayer);
+                }
+            }   
             }
+            else if(currentPosition.getOwner()==other)
+            {
+                
             }
-
+            
             }
-        }
+        
         
         else if (command.equalsIgnoreCase("stop"))
         {

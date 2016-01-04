@@ -39,7 +39,7 @@ public class Player {
     
     public void move(int move)
     {
-        if(this.position + move >40)
+        if(this.position + move >16)
         {
             this.addCash(200);
         }

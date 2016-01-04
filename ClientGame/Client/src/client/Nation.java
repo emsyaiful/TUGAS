@@ -14,6 +14,7 @@ public class Nation {
     private int position;
     private int price;
     private Player owner;
+    private int sellprice;
     
     public Nation()
     {
@@ -26,6 +27,7 @@ public class Nation {
         this.position=position;
         this.price=price;
         this.owner=owner;
+        sellprice = price/10;
     }
     
     public void buy(Player owner)
@@ -35,8 +37,8 @@ public class Nation {
     }
     public void pay(Player payer)
     {
-        payer.payCash(price);
-        this.owner.addCash(price);
+        payer.payCash(sellprice);
+        this.owner.addCash(sellprice);
     }
     
     public String getName()

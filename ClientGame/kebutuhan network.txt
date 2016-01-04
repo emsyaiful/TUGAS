@@ -25,3 +25,5 @@ output:
 kirimkan object player untuk di-broadcast statusnya
 kirimkan object Nation untuk di-broadcast statusnya
 kirimkan notifikasi untuk memulai auction
+Kirimkan object Arraylist<Player> digunakan untuk memberitahu bahwa pemain tertentu
+sudah keluar

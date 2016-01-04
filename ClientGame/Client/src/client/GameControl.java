@@ -135,38 +135,38 @@ public class GameControl {
             System.out.print("Owner: ");
             if(currentPosition.getOwner()== null)
             {
-            System.out.println("None");
-            if(currentPosition.getPrice()<= currentPlayer.getCash())
-            {
-                       System.out.println("Want to buy(y/n)?");
-               String decision= new String();
-               commandReader = new Scanner(System.in);
-               decision= commandReader.nextLine();
-               if(decision.equalsIgnoreCase("y"))
-               {
-               currentPosition.buy(currentPlayer);
-               System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
-               }
-            }
-            else
-            {
-                System.out.println("Don't have money, just visit");
-            }
+                System.out.println("None");
+                if(currentPosition.getPrice()<= currentPlayer.getCash())
+                {
+                           System.out.println("Want to buy(y/n)?");
+                   String decision= new String();
+                   commandReader = new Scanner(System.in);
+                   decision= commandReader.nextLine();
+                   if(decision.equalsIgnoreCase("y"))
+                   {
+                   currentPosition.buy(currentPlayer);
+                   System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+                   }
+                }
+                else
+                {
+                    System.out.println("Don't have money, just visit");
+                }
             
             }
             else
-            {
-                System.out.println(currentPosition.getOwner().getName());
-                if(currentPlayer != currentPosition.getOwner())
                 {
-                System.out.println("You pay to owner");
-                currentPosition.pay(currentPlayer);
-                if(currentPlayer.getCash() < 0)
-                {
-                    PlayerOrder.remove(order-1);
-                }
-                }
-            }   
+                    System.out.println(currentPosition.getOwner().getName());
+                    if(currentPlayer != currentPosition.getOwner())
+                    {
+                        System.out.println("You pay to owner");
+                        currentPosition.pay(currentPlayer);
+                        if(currentPlayer.getCash() < 0)
+                        {
+                            PlayerOrder.remove(order-1);
+                        }
+                    }
+                }   
             }
             else if(currentPosition.getOwner()==other)
             {
@@ -202,34 +202,34 @@ public class GameControl {
                     System.out.println("None");
                         if(currentPosition.getPrice()<= currentPlayer.getCash())
                         {
-                        System.out.println("Want to buy(y/n)?");
-                        String decision= new String();
-                        commandReader = new Scanner(System.in);
-                        decision= commandReader.nextLine();
+                            System.out.println("Want to buy(y/n)?");
+                            String decision= new String();
+                            commandReader = new Scanner(System.in);
+                            decision= commandReader.nextLine();
                         if(decision.equalsIgnoreCase("y"))
                         {
-                         currentPosition.buy(currentPlayer);
-                         System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+                            currentPosition.buy(currentPlayer);
+                            System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
                         }
                         }
                        else
                         {
-                        System.out.println("Don't have money, just visit");
+                            System.out.println("Don't have money, just visit");
                         }
                     }
                     else
                     {
-                    System.out.println(currentPosition.getOwner().getName());
+                        System.out.println(currentPosition.getOwner().getName());
                     if(currentPlayer != currentPosition.getOwner())
                     {
-                    System.out.println("You pay to owner");
-                    currentPosition.pay(currentPlayer);
-                        if(currentPlayer.getCash() < 0)
-                        {
-                        PlayerOrder.remove(order-1);
+                        System.out.println("You pay to owner");
+                        currentPosition.pay(currentPlayer);
+                            if(currentPlayer.getCash() < 0)
+                            {
+                            PlayerOrder.remove(order-1);
+                            }
                         }
-                    }
-                    }   
+                    }       
                     
                     
                 }
@@ -267,12 +267,12 @@ public class GameControl {
             }    
                     
                 
-         }
-        
-        else if (command.equalsIgnoreCase("stop"))
-        {
-            break;
         }
+        
+            else if (command.equalsIgnoreCase("stop"))
+            {
+                break;
+            }
         }
     }
 }

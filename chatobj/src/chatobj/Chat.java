@@ -1,3 +1,5 @@
+package chatobj;
+
 
 import java.io.Serializable;
 

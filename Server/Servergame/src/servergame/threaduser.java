@@ -5,11 +5,15 @@
  */
 package servergame;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import chatobj.*;
 
 /**
  *
@@ -21,8 +25,8 @@ public class threaduser implements Runnable{
     ArrayList<room> room;
     room rom;
     Socket socket;
-    ObjectInputStream is;
-    ObjectOutputStream os;
+    private ObjectInputStream is;
+    private ObjectOutputStream os;
     
     threaduser(Socket socket,ArrayList<room> room,int id) throws IOException{
         this.userid=id;
@@ -52,6 +56,21 @@ public class threaduser implements Runnable{
     }
     
     public void run(){
+        try {
+            Object o;
+            System.out.println("Client connect...");
+            byte[] buf = new byte[50];
+            String strbuf = new String(buf);
+            while ((o = this.is.readObject())!=null) {
+                if (o instanceof Chat) {
+                    rom.kirim(o);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(threaduser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(threaduser.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

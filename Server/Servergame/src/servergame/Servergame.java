@@ -11,13 +11,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author NARK
  */
 public class Servergame {
-
+    
     /**
      * @param args the command line arguments
      */

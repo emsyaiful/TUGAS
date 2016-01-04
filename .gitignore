@@ -19,3 +19,4 @@ hs_err_pid*
 /ClientGame/Client/build/
 /Server/Servergame/nbproject/private/
 /chatobj/nbproject/private/
+/chatobj/build/

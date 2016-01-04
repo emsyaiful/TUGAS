@@ -1,4 +1,7 @@
+package chatobj;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -11,7 +14,9 @@ import java.util.ArrayList;
  *
  * @author NARK
  */
-public class Lobby {
+public class Lobby implements Serializable{
+    private String Command;
+    private String Argument;
     private ArrayList<Integer> roomid;
     private int roomidjoin;
     private ArrayList<String> username; 

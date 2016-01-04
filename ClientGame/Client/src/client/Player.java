@@ -43,7 +43,7 @@ public class Player {
         {
             this.addCash(200);
         }
-        this.position= (position + move)%40;
+        this.position= (position + move)%16;
     }
     
     public int getCash()

@@ -10,6 +10,7 @@ package client;
  * @author asus
  */
 public class Nation {
+    String Name;
     private int position;
     private int price;
     private Player owner;
@@ -19,8 +20,9 @@ public class Nation {
         
     }
     
-    public Nation(int position,int price, Player owner)
+    public Nation(String Name,int position,int price, Player owner)
     {
+        this.Name = Name;
         this.position=position;
         this.price=price;
         this.owner=owner;
@@ -35,6 +37,11 @@ public class Nation {
     {
         payer.payCash(price);
         this.owner.addCash(price);
+    }
+    
+    public String getName()
+    {
+        return this.Name;
     }
     
     public Player getOwner()

@@ -63,6 +63,14 @@ public class GameControl {
         
     }
     
+    private void printStatus()
+    {
+        for (Player currentPlayer : PlayerOrder)
+        {
+            System.out.println(currentPlayer.getName()+" Money:"+currentPlayer.getCash()+" Position="+currentPlayer.getPosition());
+        }
+    }
+    
     private void Auction()
     {
         
@@ -99,7 +107,9 @@ public class GameControl {
             if(currentPosition.getOwner()== null)
             {
             System.out.println("None");
-            System.out.println("Want to buy(y/n)?");
+            if(currentPosition.getPrice()<= currentPlayer.getCash())
+            {
+                       System.out.println("Want to buy(y/n)?");
                String decision= new String();
                commandReader = new Scanner(System.in);
                decision= commandReader.nextLine();
@@ -108,6 +118,12 @@ public class GameControl {
                currentPosition.buy(currentPlayer);
                System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
                }
+            }
+            else
+            {
+                System.out.println("Don't have money, just visit");
+            }
+            
             }
             else
             {
@@ -151,15 +167,22 @@ public class GameControl {
                     if(currentPosition.getOwner()== null)
                     {
                     System.out.println("None");
-                    System.out.println("Want to buy(y/n)?");
-                    String decision= new String();
-                    commandReader = new Scanner(System.in);
-                    decision= commandReader.nextLine();
-                    if(decision.equalsIgnoreCase("y"))
-                    {
-                    currentPosition.buy(currentPlayer);
-                    System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
-                    }
+                        if(currentPosition.getPrice()<= currentPlayer.getCash())
+                        {
+                        System.out.println("Want to buy(y/n)?");
+                        String decision= new String();
+                        commandReader = new Scanner(System.in);
+                        decision= commandReader.nextLine();
+                        if(decision.equalsIgnoreCase("y"))
+                        {
+                         currentPosition.buy(currentPlayer);
+                         System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+                        }
+                        }
+                       else
+                        {
+                        System.out.println("Don't have money, just visit");
+                        }
                     }
                     else
                     {
@@ -174,10 +197,20 @@ public class GameControl {
                     
                 }
                 
+                else if(currentPlayer.getPosition()==12)
+                {
+                    System.out.println("You go to jail");
+                }
+                
             }
             
             }
         
+        
+        else if(command.equalsIgnoreCase("status"))
+        {
+            printStatus();
+        }
         
         else if (command.equalsIgnoreCase("stop"))
         {

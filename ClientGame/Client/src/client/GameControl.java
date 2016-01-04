@@ -56,7 +56,7 @@ public class GameControl {
     private void rollDice(Player p)
     {
         int rd= Math.abs(new Random().nextInt());
-        rd= (rd % 12)+1;
+        rd= (rd % 6)+1;
         p.move(rd);
         System.out.println("Player " + p.getName()+" Rolls "+rd +" position :"+p.getPosition());
 
@@ -121,6 +121,58 @@ public class GameControl {
             }
             else if(currentPosition.getOwner()==other)
             {
+                if(currentPlayer.getPosition()==0)
+                {
+                    
+                }
+                else if(currentPlayer.getPosition()==4)
+                {
+                    System.out.println("Just visit");
+                }
+                
+                else if(currentPlayer.getPosition()==8)
+                {
+                    System.out.println("Where do you want to go?");
+                    commandReader = new Scanner(System.in);
+                    int destination = commandReader.nextInt();
+                    if(destination<currentPlayer.getPosition())
+                    {
+                        currentPlayer.move(16+destination-currentPlayer.getPosition());
+                    }
+                    else
+                    {
+                        currentPlayer.move(destination-currentPlayer.getPosition());
+                    }
+                    
+                    currentPosition = Map.get(currentPlayer.getPosition());
+                    System.out.println("You Arrived in "+currentPosition.getName());
+
+                    System.out.print("Owner: ");
+                    if(currentPosition.getOwner()== null)
+                    {
+                    System.out.println("None");
+                    System.out.println("Want to buy(y/n)?");
+                    String decision= new String();
+                    commandReader = new Scanner(System.in);
+                    decision= commandReader.nextLine();
+                    if(decision.equalsIgnoreCase("y"))
+                    {
+                    currentPosition.buy(currentPlayer);
+                    System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+                    }
+                    }
+                    else
+                    {
+                    System.out.println(currentPosition.getOwner().getName());
+                    if(currentPlayer != currentPosition.getOwner())
+                    {
+                    System.out.println("You pay to owner");
+                    currentPosition.pay(currentPlayer);
+                    }
+                    }   
+                    
+                    
+                }
                 
             }
             

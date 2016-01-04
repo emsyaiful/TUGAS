@@ -1,0 +1,27 @@
+input:
+pada gamecontrol.java
+- attribute command dimasukkan string, scanner nanti bisa dihilangkan
+- kemungkinan isi command yang dikenal game(equalsIgnoreCase)
+	"move"(melakukan fungsi rolldice, sesuai dengan urutan player)
+	"status" (mencetak kondisi-kondisi pemain)
+	"stop"	(menghentikan game)
+	"sell" (menjual harta)
+	"leave" (meninggalkan game)
+	"y"/"n" (ya, untuk menentukan apakah kota mau dibeli atau tidak)
+-destination, jika player berada pada panel free to go, maka diperlukan input int untuk
+menentukan seberapa jauh player melangkah
+-pos, int yang diinputkan setelah command sell, untuk menunjukkan properti yang harus diinputkan
+-saat auction, selama thread dalam game berjalan, dikirimkan 2 int, berturut-turut bidplacer dan bidding
+ perhatian khusus: setelah timeout, tetap kirimkan 2 int, tetapi sifatnya dummy saja
+(misal 1 1).
+-input object player digunakan untuk mengupdate kondisi player
+ tersebut(perubahan jumlah uang ,posisi dan ownership)
+ NB:ada notifikasi perubahan jumlah uang dan posisi
+-input object Nation digunakan untuk mengupdate kondisi kota (kepemilikan kota)
+ NB: ada notifikasi perubahan kepemilikan, serta notifikasi khusus jika kepemilikan
+ kota dilepas/dijual.
+-notifikasi mulai auction
+output:
+kirimkan object player untuk di-broadcast statusnya
+kirimkan object Nation untuk di-broadcast statusnya
+kirimkan notifikasi untuk memulai auction

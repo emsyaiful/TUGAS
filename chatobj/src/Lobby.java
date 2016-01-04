@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class Lobby {
     private ArrayList<Integer> roomid;
     private int roomidjoin;
-
+    private ArrayList<String> username; 
+    private String user;
     /**
      * @return the roomid
      */
@@ -41,6 +42,34 @@ public class Lobby {
      */
     public void setRoomidjoin(int roomidjoin) {
         this.roomidjoin = roomidjoin;
+    }
+
+    /**
+     * @return the username
+     */
+    public ArrayList<String> getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(ArrayList<String> username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the user
+     */
+    public String getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(String user) {
+        this.user = user;
     }
     
 }

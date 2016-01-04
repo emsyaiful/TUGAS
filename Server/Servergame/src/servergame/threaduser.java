@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class threaduser implements Runnable{
     int userid;
+    private String username;
     ArrayList<room> room;
     room rom;
     Socket socket;
@@ -52,5 +53,19 @@ public class threaduser implements Runnable{
     
     public void run(){
         
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

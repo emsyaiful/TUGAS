@@ -39,4 +39,12 @@ public class room{
     public void removeplayer(threaduser tu){
         player.remove(tu);
     }
+    
+    public ArrayList<String> Usernames(){
+        ArrayList<String> user=new ArrayList<String>();
+        for(threaduser tu:player){
+            user.add(tu.getUsername());
+        }
+        return user;
+    }
 }

@@ -15,7 +15,7 @@ public class GameControl {
     private ArrayList<Player> PlayerOrder;
     private ArrayList<Nation> Map;
     private Player other;
-   
+    private int auctionFlag;
     private void loadMap()
     {   
         other= new Player();
@@ -71,9 +71,38 @@ public class GameControl {
         }
     }
     
-    private void Auction(Nation auctionNation)
+    public void setflag(){
+        auctionFlag=1;
+    }
+    
+    private void Auction(Nation auctionNation,Player formerOwner)
     {
-        
+        Scanner bidReader;
+        int bid = 0;
+        int bidPlacer=0;
+        int bidding = 0;
+        auctionFlag = 0;
+        Timer ti=new Timer(this);
+        Thread t=new Thread(ti);
+        t.start();
+        while(auctionFlag == 0)
+        {
+            System.out.println("Highest bidding:"+bid);
+ 
+            bidReader = new Scanner(System.in);
+            bidPlacer = bidReader.nextInt();
+            bidReader = new Scanner(System.in);
+            bidding = bidReader.nextInt();
+            
+            if(bidding>bid && PlayerOrder.get(bidPlacer).getCash()>bidding)
+            {
+                bid = bidding;
+                System.out.println("Player="+bidPlacer+" bidding="+bidding);
+                ti.resettimer();
+            }
+        }
+        formerOwner.addCash(bid);
+        PlayerOrder.get(bidPlacer).payCash(bid);
     }
     
     public void beginGame(Player p1, Player p2, Player p3, Player p4)
@@ -85,6 +114,8 @@ public class GameControl {
         PlayerOrder.add(p2);
         PlayerOrder.add(p3);
         PlayerOrder.add(p4);
+        int size= PlayerOrder.size();
+        int order= 0;
         
         //prototype fungsi
         while(true)
@@ -94,10 +125,8 @@ public class GameControl {
         command = commandReader.nextLine();
         if(command.equalsIgnoreCase("move"))
             {
-            System.out.println("choose which player to move");
-            int order = commandReader.nextInt();
-            Player currentPlayer = PlayerOrder.get(order-1);
-            rollDice(PlayerOrder.get(order-1));
+            Player currentPlayer = PlayerOrder.get(order);
+            rollDice(currentPlayer);
             Nation currentPosition = Map.get(currentPlayer.getPosition());
             System.out.println("You Arrived in "+currentPosition.getName());
             if(currentPosition.getOwner() !=other)
@@ -132,6 +161,10 @@ public class GameControl {
                 {
                 System.out.println("You pay to owner");
                 currentPosition.pay(currentPlayer);
+                if(currentPlayer.getCash() < 0)
+                {
+                    PlayerOrder.remove(order-1);
+                }
                 }
             }   
             }
@@ -191,6 +224,10 @@ public class GameControl {
                     {
                     System.out.println("You pay to owner");
                     currentPosition.pay(currentPlayer);
+                        if(currentPlayer.getCash() < 0)
+                        {
+                        PlayerOrder.remove(order-1);
+                        }
                     }
                     }   
                     
@@ -203,7 +240,7 @@ public class GameControl {
                 }
                 
             }
-            
+             order = (order+1)%size;
             }
         
         
@@ -214,10 +251,7 @@ public class GameControl {
         
         else if (command.equalsIgnoreCase("sell"))
         {
-            System.out.println("what player?");
-            commandReader = new Scanner(System.in);
-            int order = commandReader.nextInt();
-            Player currentPlayer= PlayerOrder.get(order-1);
+            Player currentPlayer= PlayerOrder.get(order);
             System.out.println("where do you want to sell?");
             commandReader = new Scanner(System.in);
             int pos = commandReader.nextInt();
@@ -225,10 +259,15 @@ public class GameControl {
             if(currentPosition.getOwner().equals(currentPlayer))
             {
                 currentPosition.releaseOwner();
-                Auction(currentPosition);
+                Auction(currentPosition,currentPlayer);
             }
+            else
+            {
+                System.out.println("Can't Sell, you don't own this city");
+            }    
+                    
                 
-        }
+         }
         
         else if (command.equalsIgnoreCase("stop"))
         {

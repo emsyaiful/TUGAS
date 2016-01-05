@@ -4,7 +4,6 @@ pada gamecontrol.java
 - kemungkinan isi command yang dikenal game(equalsIgnoreCase)
 	"move"(melakukan fungsi rolldice, sesuai dengan urutan player)
 	"status" (mencetak kondisi-kondisi pemain)
-	"stop"	(menghentikan game)
 	"sell" (menjual harta)
 	"leave" (meninggalkan game)
 	"y"/"n" (ya, untuk menentukan apakah kota mau dibeli atau tidak)
@@ -25,5 +24,3 @@ output:
 kirimkan object player untuk di-broadcast statusnya
 kirimkan object Nation untuk di-broadcast statusnya
 kirimkan notifikasi untuk memulai auction
-Kirimkan object Arraylist<Player> digunakan untuk memberitahu bahwa pemain tertentu
-sudah keluar

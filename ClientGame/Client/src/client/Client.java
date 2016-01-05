@@ -36,10 +36,10 @@ public class Client {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         Scanner sc = new Scanner(System.in);
-//        Socket socket = new Socket("localhost", 9988);
-//        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-//        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        game();
+        Socket socket = new Socket("localhost", 9988);
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+//        game();
         
         
     }

@@ -20,6 +20,7 @@ import chatobj.*;
  * @author NARK
  */
 public class threaduser implements Runnable{
+    Servergame sg;
     int userid;
     private String username;
     ArrayList<room> room;
@@ -28,9 +29,10 @@ public class threaduser implements Runnable{
     private ObjectInputStream is;
     private ObjectOutputStream os;
     
-    threaduser(Socket socket,ArrayList<room> room,int id) throws IOException{
+    threaduser(Socket socket,ArrayList<room> room,int id,Servergame sg) throws IOException{
         this.userid=id;
         this.room=room;
+        this.sg=sg;
         this.socket=socket;
         this.is=new ObjectInputStream(socket.getInputStream());
         this.os=new ObjectOutputStream(socket.getOutputStream());
@@ -42,6 +44,15 @@ public class threaduser implements Runnable{
         os.reset();
     }
     
+    public void addroom(room rom){
+        System.out.println("getting the room");
+        this.rom=rom;
+        System.out.println(rom.getroomid());
+    }
+    
+//    public void removeroom(){
+  //      this.rom=null;
+    //}
     public void addtoroom(int idroom){
         for(room ro:room){
             if(ro.getroomid()==idroom){
@@ -63,7 +74,40 @@ public class threaduser implements Runnable{
             String strbuf = new String(buf);
             while ((o = this.is.readObject())!=null) {
                 if (o instanceof Chat) {
+                    System.out.println("masuk");
+                    Chat c=(Chat) o;
+                    System.out.println(rom.getroomid());
                     rom.kirim(o);
+                }
+                else if(o instanceof Game){
+                    rom.kirim(o);
+                }
+                else if(o instanceof Lobby){
+                    System.out.println("masuk lobby");
+                    Lobby lob=(Lobby) o;
+                    System.out.println("test");
+                    if(lob.getCommand().equalsIgnoreCase("JOIN")){
+                        System.out.println("Room Joined");
+                        this.username=lob.getUsername();
+                        addtoroom(lob.getRoomidjoin());
+                        rom.notice();
+                    }
+                    else if(lob.getCommand().equalsIgnoreCase("CREATE")){
+                        System.out.println("Room Created");
+                        this.username=lob.getUsername();
+                        sg.makeroom(this);
+                        rom.notice();     
+                    }
+                    else if(lob.getCommand().equalsIgnoreCase("LEAVE")){
+//                        removeroom();
+                        rom.notice();
+                    }
+                    else if(lob.getCommand().equalsIgnoreCase("GETLIST")){
+                        Lobby balas=new Lobby();
+                        balas.setCommand("LISTLOB");
+                        balas.setRoomid(sg.getIdroom());
+                        sent(balas);
+                    }
                 }
             }
         } catch (IOException ex) {

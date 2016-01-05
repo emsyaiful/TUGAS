@@ -18,9 +18,9 @@ public class Lobby implements Serializable{
     private String Command;
     private String Argument;
     private ArrayList<Integer> roomid;
-    private int roomidjoin;
-    private ArrayList<String> username; 
-    private String user;
+    private int roomidjoin=0;
+    private ArrayList<String> usernames; 
+    private String username;
     /**
      * @return the roomid
      */
@@ -52,29 +52,57 @@ public class Lobby implements Serializable{
     /**
      * @return the username
      */
-    public ArrayList<String> getUsername() {
-        return username;
+    public ArrayList<String> getUsernames() {
+        return usernames;
     }
 
     /**
      * @param username the username to set
      */
-    public void setUsername(ArrayList<String> username) {
-        this.username = username;
+    public void setUsernames(ArrayList<String> usernames) {
+        this.usernames = usernames;
     }
 
     /**
      * @return the user
      */
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * @param user the user to set
      */
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the Command
+     */
+    public String getCommand() {
+        return Command;
+    }
+
+    /**
+     * @param Command the Command to set
+     */
+    public void setCommand(String Command) {
+        this.Command = Command;
+    }
+
+    /**
+     * @return the Argument
+     */
+    public String getArgument() {
+        return Argument;
+    }
+
+    /**
+     * @param Argument the Argument to set
+     */
+    public void setArgument(String Argument) {
+        this.Argument = Argument;
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package servergame;
 
+import chatobj.Lobby;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class room{
     }
     
     public void kirim(Object o) throws IOException{
+        System.out.println("masuk2");
         for(threaduser t:player){
             t.sent(o);
         }
@@ -46,5 +48,12 @@ public class room{
             user.add(tu.getUsername());
         }
         return user;
+    }
+    
+    public void notice() throws IOException{
+        Lobby balas=new Lobby();
+        balas.setCommand("INSIDEROOM");
+        balas.setUsernames(this.Usernames());
+        this.kirim(balas);
     }
 }

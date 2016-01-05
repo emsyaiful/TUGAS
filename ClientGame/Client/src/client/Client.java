@@ -39,7 +39,17 @@ public class Client {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // TODO code application logic here
+<<<<<<< HEAD
         GUI_All ga = new GUI_All();
         ga.setVisible(true);
+=======
+        Scanner sc = new Scanner(System.in);
+        Socket socket = new Socket("localhost", 9988);
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+//        game();
+        
+        
+>>>>>>> 1ca62ef7a7acb90630fa242145cddbd4b0822065
     }
 }

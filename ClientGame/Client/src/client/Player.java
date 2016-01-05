@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package client;
-
+import java.util.ArrayList;
 /**
  *
  * @author asus
@@ -13,8 +13,7 @@ public class Player {
     private int cash;
     private int position;
     private String name;
-
-    
+    private ArrayList<Nation> Ownership;
     public Player()
     {
         
@@ -25,6 +24,14 @@ public class Player {
         this.name  = name;
         this.cash  = cash;
         this.position =position;
+        Ownership = new ArrayList<>();
+    }
+    
+    public void update(Player updatePlayer)
+    {
+        this.cash = updatePlayer.getCash();
+        this.position = updatePlayer.getPosition();
+        this.Ownership = updatePlayer.getOwnership();
     }
     
     public void addCash(int add)
@@ -57,5 +64,25 @@ public class Player {
     public String getName()
     {
         return this.name;
+    }
+    
+    public ArrayList<Nation> getOwnership()
+    {
+        return this.Ownership;
+    }
+    
+    public void addOwnership(Nation ownCity)
+    {
+        Ownership.add(ownCity);
+    } 
+    public void releaseOwnership(Nation ownCity)
+    {
+        for(Nation owning: Ownership)
+        {
+            if(ownCity.getPosition()==owning.getPosition())
+            {
+               Ownership.remove(owning);
+            }
+        }
     }
 }

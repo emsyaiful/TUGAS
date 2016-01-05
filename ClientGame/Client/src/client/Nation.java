@@ -30,6 +30,11 @@ public class Nation {
         rentprice = price/10;
     }
     
+    public void update(Nation updateNation)
+    {
+        this.owner = updateNation.getOwner();
+    }
+    
     public void buy(Player owner)
     {
         this.owner = owner;

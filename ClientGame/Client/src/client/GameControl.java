@@ -63,11 +63,25 @@ public class GameControl {
         
     }
     
+    private void bankrupt(Player bankruptPlayer)
+    {
+        PlayerOrder.remove(bankruptPlayer);
+        System.out.println(bankruptPlayer.getName()+" bankrupt, leaving the game");
+        for(Nation owncity : bankruptPlayer.getOwnership())
+        {
+            owncity.releaseOwner();
+        }
+    }
+    
     private void printStatus()
     {
         for (Player currentPlayer : PlayerOrder)
         {
             System.out.println(currentPlayer.getName()+" Money:"+currentPlayer.getCash()+" Position="+currentPlayer.getPosition());
+            for(Nation owningCity:currentPlayer.getOwnership())
+            {
+                System.out.println(owningCity.getName()+" position:"+owningCity.getPosition());
+            }
         }
     }
     
@@ -78,7 +92,7 @@ public class GameControl {
     private void Auction(Nation auctionNation,Player formerOwner)
     {
         Scanner bidReader;
-        int bid = 0;
+        int bid = auctionNation.getPrice()/2;
         int bidPlacer=0;
         int bidding = 0;
         auctionFlag = 0;
@@ -103,6 +117,7 @@ public class GameControl {
         }
         formerOwner.addCash(bid);
         PlayerOrder.get(bidPlacer).payCash(bid);
+        PlayerOrder.get(bidPlacer).addOwnership(auctionNation);
     }
     
     public void beginGame(Player p1, Player p2, Player p3, Player p4)
@@ -120,9 +135,16 @@ public class GameControl {
         //prototype fungsi
         while(true)
         {
+        if(PlayerOrder.size()<2)
+        {
+            System.out.println("The winner:"+PlayerOrder.get(0).getName());
+            break;
+        }    
         String command = new String();
         Scanner commandReader = new Scanner(System.in);
+        
         command = commandReader.nextLine();
+
         if(command.equalsIgnoreCase("move"))
             {
             Player currentPlayer = PlayerOrder.get(order);
@@ -146,6 +168,7 @@ public class GameControl {
                    {
                    currentPosition.buy(currentPlayer);
                    System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+                   currentPlayer.addOwnership(currentPosition);
                    }
                 }
                 else
@@ -163,7 +186,7 @@ public class GameControl {
                         currentPosition.pay(currentPlayer);
                         if(currentPlayer.getCash() < 0)
                         {
-                            PlayerOrder.remove(order-1);
+                            bankrupt(currentPlayer);
                         }
                     }
                 }   
@@ -210,6 +233,7 @@ public class GameControl {
                         {
                             currentPosition.buy(currentPlayer);
                             System.out.println("You buy "+currentPosition.getName()+ " Remaining Money: " + currentPlayer.getCash());
+                            currentPlayer.addOwnership(currentPosition);
                         }
                         }
                        else
@@ -226,6 +250,7 @@ public class GameControl {
                         currentPosition.pay(currentPlayer);
                             if(currentPlayer.getCash() < 0)
                             {
+                            
                             PlayerOrder.remove(order-1);
                             }
                         }
@@ -259,6 +284,7 @@ public class GameControl {
             if(currentPosition.getOwner().equals(currentPlayer))
             {
                 currentPosition.releaseOwner();
+                currentPlayer.releaseOwnership(currentPosition);
                 Auction(currentPosition,currentPlayer);
             }
             else
@@ -269,9 +295,9 @@ public class GameControl {
                 
         }
         
-            else if (command.equalsIgnoreCase("stop"))
+            else if(command.equalsIgnoreCase("quit"))
             {
-                break;
+                bankrupt(PlayerOrder.get(order));
             }
         }
     }

@@ -21,9 +21,9 @@ public class Servergame {
      * @param args the command line arguments
      */
 
-    ArrayList<threaduser> threuser;
-    ArrayList<room> roomava;
-    ArrayList<Integer> idroom;
+    ArrayList<threaduser> threuser=new ArrayList<threaduser>();
+    ArrayList<room> roomava=new ArrayList<room>();
+    private ArrayList<Integer> idroom=new ArrayList<Integer>();
     int roomid=0;
     int userid=0;
     
@@ -41,7 +41,7 @@ public class Servergame {
             while(true) {
                 Socket socket;
                 socket = servsock.accept();
-                threaduser tc = new threaduser(socket,roomava,userid);
+                threaduser tc = new threaduser(socket,roomava,userid,this);
                 threuser.add(tc);
                 userid+=1;
                 Thread t = new Thread(tc);
@@ -56,6 +56,7 @@ public class Servergame {
         room newroom=new room(tu,roomid);
         roomava.add(newroom);
         idroom.add(roomid);
+        tu.addroom(newroom);
         roomid+=1;
         
     }
@@ -64,7 +65,7 @@ public class Servergame {
         for(room ro:roomava){
             if(ro.getroomid()==id){
              roomava.remove(ro);
-             idroom.remove(ro.getroomid());
+                getIdroom().remove(ro.getroomid());
              break;
             }
         }
@@ -74,5 +75,12 @@ public class Servergame {
         for(threaduser tu:threuser){
             tu.sent(o);
         }
+    }
+
+    /**
+     * @return the idroom
+     */
+    public ArrayList<Integer> getIdroom() {
+        return idroom;
     }
 }

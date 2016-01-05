@@ -10,12 +10,15 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.ArrayList;
+import chatobj.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author asus
  */
 public class Client {
-
+    private GUI_All ga;
     /**
      * @param args the command line arguments
      */
@@ -33,14 +36,10 @@ public class Client {
         //Loading map
         GC.beginGame(player1, player2, player3, player4);
     }
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         // TODO code application logic here
-        Scanner sc = new Scanner(System.in);
-        Socket socket = new Socket("localhost", 9988);
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        
-        
+        GUI_All ga = new GUI_All();
+        ga.setVisible(true);
     }
-    
 }
